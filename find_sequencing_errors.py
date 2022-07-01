@@ -47,16 +47,6 @@ for read in inbam:
             deletion_lengths.append(tup[1])
             isIndel = True
             hasIndel = True
-        else:
-            #print("PROBLEM")
-            print("PROBLEM:"+str(tup))
-        #elif tup[0] == 3:
-        #elif tup[0] == 4:
-        #elif tup[0] == 5:
-        #elif tup[0] == 6:
-        #elif tup[0] == 7:
-        #elif tup[0] == 8:
-        #elif tup[0] == 9:
         if not isIndel:
             ref_seq = infa.fetch(read.reference_name,read.reference_start+pos + offset, read.reference_start+pos + tup[1] + offset)
             read_seq = read.query_sequence[pos:pos + tup[1]]
@@ -74,7 +64,6 @@ for read in inbam:
                     hasError = True
                 pos = pos + 1
         else:
-            #print(insertion_qualities[0][0])
             print(read.query_qualities[0])
             print("Skipping Over Indel...")
             pos = pos + tup[1]
@@ -127,8 +116,3 @@ for read in inbam:
         else:
             output_file_forward.write(read.query_name+'\t'+str(num_errors)+'\t'+seq_error_line+'\t'+seq_qualities_line+'\t'+str(num_insertions)+'\t'+insertion_line+'\t'+insertion_lengths_line+'\t'+insertion_qualities_line+'\t'+str(num_deletions)+'\t'+deletion_line+'\t'+deletion_lengths_line+'\t'+str(read.is_read1)+'\n')
         hasError=False
-    #else:
-    #    print("FLAWLESS")
-    #total+=1
-#    print("Total:"+str(total))
-    #break
